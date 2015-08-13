@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
+#include "PluginAdColony/PluginAdColony.h"
 
 USING_NS_CC;
 
@@ -35,6 +36,9 @@ static int register_all_packages()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
+
+    sdkbox::PluginAdColony::init();
+
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
