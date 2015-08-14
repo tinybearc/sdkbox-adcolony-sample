@@ -1,4 +1,6 @@
 #include "HelloWorldScene.h"
+#include "cocostudio/CocoStudio.h"
+#include "PluginAdColony/PluginAdColony.h"
 
 USING_NS_CC;
 
@@ -20,6 +22,8 @@ Scene* HelloWorld::createScene()
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
+    _coin = 0;
+    
     //////////////////////////////
     // 1. super init first
     if ( !Layer::init() )
@@ -27,54 +31,43 @@ bool HelloWorld::init()
         return false;
     }
     
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+    FileUtils::getInstance()->addSearchPath("res");
     
-	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
+    sdkbox::PluginAdColony::init();
+    sdkbox::PluginAdColony::setListener(this);
 
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
-
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
+    auto rootNode = CSLoader::createNode("MainScene.csb");
+    addChild(rootNode);
     
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
+    _btnVideo = rootNode->getChildByName<ui::Button*>("btnVideo");
+    _btnVideo->addClickEventListener(CC_CALLBACK_1(HelloWorld::onPlayVideo, this));
+    _btnVideo->setBright(false);
     
-    // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
-
-    // add the label as a child to this layer
-    this->addChild(label, 1);
-
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-
-    // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-    // add the sprite as a child to this layer
-    this->addChild(sprite, 0);
+    _btnReward = rootNode->getChildByName<ui::Button*>("btnReward");
+    _btnReward->addClickEventListener(CC_CALLBACK_1(HelloWorld::onPlayReward, this));
+    _btnReward->setBright(false);
+    
+    _txtCoin = rootNode->getChildByName<ui::Text*>("txtCoins");
+    
+    auto btnClose = rootNode->getChildByName<ui::Button*>("btnClose");
+    btnClose->addClickEventListener(CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
     
     return true;
 }
 
+/**
+ * Button callback
+ */
+
+void HelloWorld::onPlayVideo(Ref *pSender)
+{
+    sdkbox::PluginAdColony::show("video");
+}
+
+void HelloWorld::onPlayReward(Ref* sender)
+{
+    sdkbox::PluginAdColony::show("v4vc");
+}
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
@@ -83,4 +76,34 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
+}
+
+/** 
+ * AdColony Callback
+ */
+void HelloWorld::onAdColonyChange(const sdkbox::AdColonyAdInfo& info, bool available)
+{
+    CCLOG("Finish loading ads %s", info.name.c_str());
+    _btnVideo->setBright(true);
+    _btnReward->setBright(true);
+}
+
+void HelloWorld::onAdColonyReward(const sdkbox::AdColonyAdInfo& info, const std::string& currencyName, int amount, bool success)
+{
+    if (success)
+    {
+        //
+        _coin ++;
+        _txtCoin->setString(std::to_string(_coin));
+    }
+}
+
+void HelloWorld::onAdColonyStarted(const sdkbox::AdColonyAdInfo& info)
+{
+    CCLOG("Ad started: %s", info.name.c_str());
+}
+
+void HelloWorld::onAdColonyFinished(const sdkbox::AdColonyAdInfo& info)
+{
+    CCLOG("Ad ended: %s", info.name.c_str());
 }
