@@ -4,6 +4,13 @@
 
 USING_NS_CC;
 
+template < typename T > std::string to_string( const T& n )
+{
+    std::ostringstream stm ;
+    stm << n ;
+    return stm.str() ;
+}
+
 Scene* HelloWorld::createScene()
 {
     // 'scene' is an autorelease object
@@ -94,7 +101,7 @@ void HelloWorld::onAdColonyReward(const sdkbox::AdColonyAdInfo& info, const std:
     {
         //
         _coin ++;
-        _txtCoin->setString(std::to_string(_coin));
+        _txtCoin->setString(to_string(_coin));
     }
 }
 
