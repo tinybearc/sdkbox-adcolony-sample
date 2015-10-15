@@ -40,6 +40,8 @@
 #endif
 
 #include "PluginAdColonyJS.hpp"
+#include "PluginAdColonyJSHelper.h"
+#include "PluginAdColonyJS.hpp"
 #include "PluginAdColonyJSHelper.hpp"
 
 USING_NS_CC;
@@ -148,6 +150,9 @@ bool AppDelegate::applicationDidFinishLaunching()
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     sc->addRegisterCallback(JavaScriptObjCBridge::_js_register);
 #endif
+
+    sc->addRegisterCallback(register_all_PluginAdColonyJS);
+    sc->addRegisterCallback(register_all_PluginAdColonyJS_helper);
     sc->start();    
     sc->runScript("script/jsb_boot.js");
 #if defined(COCOS2D_DEBUG) && (COCOS2D_DEBUG > 0)
