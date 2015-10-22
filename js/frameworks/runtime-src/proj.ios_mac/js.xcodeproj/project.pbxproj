@@ -153,6 +153,7 @@
 		509D4AE817EBB82000697056 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		509D4AEA17EBB82600697056 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		517D4CF2A108FB56AAEB223E /* SDKBoxJSHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SDKBoxJSHelper.h; path = /Users/niteluo/Projects/test/cocos/sdkbox-adcolony-sample/js/frameworks/runtime-src/Classes/SDKBoxJSHelper.h; sourceTree = "<absolute>"; };
+		533F4FA5BECF9BBA97F30651 /* PluginAdColonyJSHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginAdColonyJSHelper.h; path = ../Classes/PluginAdColonyJSHelper.h; sourceTree = SOURCE_ROOT; };
 		573444748396C24C783B3DA6 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/EventKit.framework; sourceTree = DEVELOPER_DIR; };
 		5B654D7FA5EF101E06D6B93F /* PluginAdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PluginAdColony.framework; path = PluginAdColony.framework; sourceTree = "<group>"; };
 		6390489291C5E91E7B684E6C /* PluginAdColonyJSHelper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginAdColonyJSHelper.hpp; path = /Users/niteluo/Projects/test/cocos/sdkbox-adcolony-sample/js/frameworks/runtime-src/Classes/PluginAdColonyJSHelper.hpp; sourceTree = "<absolute>"; };
@@ -433,6 +434,7 @@
 				6390489291C5E91E7B684E6C /* PluginAdColonyJSHelper.hpp */,
 				0214482B82DF414851132D3C /* SDKBoxJSHelper.cpp */,
 				517D4CF2A108FB56AAEB223E /* SDKBoxJSHelper.h */,
+				533F4FA5BECF9BBA97F30651 /* PluginAdColonyJSHelper.h */,
 			);
 			name = Classes;
 			path = ../Classes;
