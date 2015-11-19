@@ -8,20 +8,44 @@ var HelloWorldLayer = cc.Layer.extend({
 
         var size = cc.winSize;
 
-        var ui = ccs.load(res.MainScene_json);
-        this.addChild(ui.node);
+        // var ui = ccs.load(res.MainScene_json);
+        // this.addChild(ui.node);
 
-        var btnVideo = ui.node.getChildByName("btnVideo");
-        btnVideo.addClickEventListener(function(){
-            sdkbox.PluginAdColony.show("video");
-        });
+        // var btnVideo = ui.node.getChildByName("btnVideo");
+        // btnVideo.addClickEventListener(function(){
+        //     sdkbox.PluginAdColony.show("video");
+        // });
 
-        var btnReward = ui.node.getChildByName("btnReward");
-        btnReward.addClickEventListener(function(){
-            sdkbox.PluginAdColony.show("v4vc");
-        });
+        // var btnReward = ui.node.getChildByName("btnReward");
+        // btnReward.addClickEventListener(function(){
+        //     sdkbox.PluginAdColony.show("v4vc");
+        // });
 
-        this._txtCoins = ui.node.getChildByName("txtCoins");
+        // this._txtCoins = ui.node.getChildByName("txtCoins");
+
+        var btnVideo = new cc.MenuItemFont("btnVideo", function () {
+          sdkbox.PluginAdColony.show("video");
+        }, this);
+
+        var btnReward = new cc.MenuItemFont("btnReward", function () {
+          sdkbox.PluginAdColony.show("v4vc");
+        }, this);
+
+        var menu = new cc.Menu(btnVideo, btnReward);
+        menu.x = size.width/2;
+        menu.y = size.height/2;
+        menu.alignItemsVerticallyWithPadding(5);
+        this.addChild(menu);
+
+        var txt = new cc.LabelTTF("Coins:", "Arial", 38);
+        txt.x = size.width - 200;
+        txt.y = size.height - 100;
+        this.addChild(txt, 5);
+
+        this._txtCoins = new cc.LabelTTF("0", "Arial", 38);
+        this._txtCoins.x = txt.getPositionX() + 70;
+        this._txtCoins.y = txt.getPositionY();
+        this.addChild(this._txtCoins, 5);
 
         sdkbox.PluginAdColony.init();
         sdkbox.PluginAdColony.setListener({
