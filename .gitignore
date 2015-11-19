@@ -6,9 +6,10 @@ bin/
 obj/
 gen/
 assets/
-cpp/proj.android/libs/
-js/frameworks/runtime-src/proj.android/libs/
 local.properties
+gdb.setup
+gdbserver
+libcocos2dcpp.so
 
 # Xcode
 .DS_Store
