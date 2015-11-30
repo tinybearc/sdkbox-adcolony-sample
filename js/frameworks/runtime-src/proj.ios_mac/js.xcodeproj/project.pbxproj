@@ -643,6 +643,9 @@
 					"\"AdColony.framework\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					-DSDKBOX_ENABLED,
+				);
 				OTHER_LDFLAGS = (
 					-fobjc-arc,
 					"-force_load AdColony.framework/AdColony",
@@ -676,7 +679,10 @@
 					"\"PluginAdColony.framework\"",
 					"\"AdColony.framework\"",
 				);
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					-DSDKBOX_ENABLED,
+				);
 				OTHER_LDFLAGS = (
 					-fobjc-arc,
 					"-force_load AdColony.framework/AdColony",
@@ -716,6 +722,9 @@
 					"\"sdkbox.framework\"",
 					"\"PluginAdColony.framework\"",
 					"\"AdColony.framework\"",
+				);
+				OTHER_CFLAGS = (
+					-DSDKBOX_ENABLED,
 				);
 				OTHER_LDFLAGS = (
 					"",
@@ -758,6 +767,9 @@
 					"\"sdkbox.framework\"",
 					"\"PluginAdColony.framework\"",
 					"\"AdColony.framework\"",
+				);
+				OTHER_CFLAGS = (
+					-DSDKBOX_ENABLED,
 				);
 				OTHER_LDFLAGS = (
 					"",
