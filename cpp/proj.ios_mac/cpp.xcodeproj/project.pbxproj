@@ -497,6 +497,9 @@
 					"\"PluginAdColony.framework\"",
 					"\"AdColony.framework\"",
 				);
+				OTHER_CFLAGS = (
+					-DSDKBOX_ENABLED,
+				);
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_IOS_BEGIN)",
 					"$(_COCOS_LIB_IOS_END)",
@@ -540,6 +543,9 @@
 					"\"sdkbox.framework\"",
 					"\"PluginAdColony.framework\"",
 					"\"AdColony.framework\"",
+				);
+				OTHER_CFLAGS = (
+					-DSDKBOX_ENABLED,
 				);
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_IOS_BEGIN)",
