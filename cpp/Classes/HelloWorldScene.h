@@ -24,6 +24,7 @@ private:
     cocos2d::ui::Button* _btnVideo;
     cocos2d::ui::Button* _btnReward;
     cocos2d::ui::Text* _txtCoin;
+    cocos2d::Label* _txtStat;
     int _coin;
     
     void onPlayVideo(cocos2d::Ref* pSender);

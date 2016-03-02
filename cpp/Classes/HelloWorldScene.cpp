@@ -55,6 +55,11 @@ bool HelloWorld::init()
     _btnReward->setBright(false);
 
     _txtCoin = rootNode->getChildByName<ui::Text*>("txtCoins");
+    
+    _txtStat = Label::createWithTTF("Not Available", "fonts/Marker Felt.ttf",32);
+    _txtStat->setAnchorPoint(cocos2d::Point(0, 0));
+    _txtStat->setPosition(cocos2d::Point(500, 440));
+    addChild(_txtStat);
 
     auto btnClose = rootNode->getChildByName<ui::Button*>("btnClose");
     btnClose->addClickEventListener(CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
@@ -93,6 +98,12 @@ void HelloWorld::onAdColonyChange(const sdkbox::AdColonyAdInfo& info, bool avail
     CCLOG("[adcolony] Finish loading ads %s", info.name.c_str());
     _btnVideo->setBright(true);
     _btnReward->setBright(true);
+
+    if (available) {
+        _txtStat->setString("Available");
+    } else {
+        _txtStat->setString("Not Available");
+    }
 }
 
 void HelloWorld::onAdColonyReward(const sdkbox::AdColonyAdInfo& info, const std::string& currencyName, int amount, bool success)

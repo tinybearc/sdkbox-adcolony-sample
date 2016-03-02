@@ -47,15 +47,22 @@ var HelloWorldLayer = cc.Layer.extend({
         this._txtCoins.y = txt.getPositionY();
         this.addChild(this._txtCoins, 5);
 
+        this._txtStat = new cc.LabelTTF("Not Available", "Arial", 38);
+        this._txtStat.x = txt.getPositionX();
+        this._txtStat.y = txt.getPositionY() - 40;
+        this.addChild(this._txtStat, 5);
+
         sdkbox.PluginAdColony.init();
         sdkbox.PluginAdColony.setListener({
             onAdColonyChange : function (data, available) {
                 if (available) {
                     //
+                    self._txtStat.setString("Available");
                     cc.log("Ads available");
                 }
                 else {
                     //
+                    self._txtStat.setString("Not Available");
                     cc.log("Failed to cache ads");
                 }
             },

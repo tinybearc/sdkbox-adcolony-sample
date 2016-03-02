@@ -5,7 +5,7 @@ local MainScene = class("MainScene", cc.load("mvc").ViewBase)
 
 function MainScene:onCreate()
 
-	self._coin = 0
+    self._coin = 0
     cc.Label:createWithSystemFont("Adcolony - Lua", "Arial", 38)
         :move(display.cx, display.height - 50)
         :addTo(self)
@@ -31,12 +31,18 @@ function MainScene:onCreate()
         :move(txt:getPositionX() + 70, txt:getPositionY())
         :addTo(self)
 
+    self._txtStat = cc.Label:createWithSystemFont("Not Available", "Arial", 38)
+        :move(txt:getPositionX(), txt:getPositionY() - 40)
+        :addTo(self)
+
     sdkbox.PluginAdColony:init()
     sdkbox.PluginAdColony:setListener(function(args)
         if "onAdColonyChange" == args.name then
             if args.available then
+                self._txtStat:setString("Available")
                 print("Ads available")
             else
+                self._txtStat:setString("Not Available")
                 print("Failed to cache ads")
             end
         elseif "onAdColonyReward" ==  args.name then
